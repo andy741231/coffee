@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>咖啡廳品牌建置與營運輔導企劃</title>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- PptxGenJS -->
+    <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/libs/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.min.js"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #3E2723;
+            --primary: #5D4037;
+            --secondary: #8D6E63;
+            --accent: #D7CCC8;
+            --bg-color: #FDFBF7;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease;
+        }
+
+        /* Layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar - Timeline */
+        .sidebar {
+            width: 280px;
+            background: var(--white);
+            padding: 30px;
+            border-right: 1px solid var(--accent);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: transform 0.4s ease;
+            z-index: 10;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .sidebar-header {
+            margin-bottom: 40px;
+        }
+
+        .sidebar h2 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--accent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0.8;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover,
+        .timeline-item.active {
+            transform: translateX(5px);
+            opacity: 1;
+        }
+
+        .timeline-item:hover::before,
+        .timeline-item.active::before {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .timeline-time {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .timeline-title {
+            font-size: 0.95rem;
+            color: var(--primary-dark);
+            font-weight: 500;
+            margin-top: 3px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px;
+            padding-top: 80px;
+            transition: margin 0.4s ease, padding 0.4s ease;
+        }
+
+        .slide-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .slide {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 50px 60px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(93, 64, 55, 0.05);
+            border-top: 5px solid var(--primary);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease;
+        }
+
+        .slide:hover {
+            box-shadow: 0 15px 40px rgba(93, 64, 55, 0.1);
+        }
+
+        .slide-title {
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .slide-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .slide-time {
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slide-amount {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+            background: rgba(141, 110, 99, 0.1);
+            padding: 5px 15px;
+            border-radius: 8px;
+        }
+
+        .slide-desc {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.8;
+            border-left: 4px solid var(--secondary);
+            padding-left: 20px;
+            flex-grow: 1;
+        }
+
+        /* Cover Slide */
+        .cover-slide {
+            text-align: center;
+            border-top: none;
+            background: linear-gradient(135deg, #5D4037 0%, #3E2723 100%);
+            color: var(--white);
+            justify-content: center;
+        }
+
+        .cover-slide .slide-title {
+            color: var(--white);
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .cover-slide .slide-desc {
+            color: var(--accent);
+            border: none;
+            padding: 0;
+            font-size: 1.5rem;
+        }
+
+        /* Controls Fixed Bar */
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--white);
+            padding: 8px 12px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .btn:hover,
+        .btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Editing Mode */
+        [contenteditable="true"] {
+            outline: 2px dashed rgba(141, 110, 99, 0.3);
+            outline-offset: 4px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        [contenteditable="true"]:focus {
+            outline: 2px solid var(--primary);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Print Styles for PDF */
+        @media print {
+
+            .sidebar,
+            .controls {
+                display: none !important;
+            }
+
+            .main-content {
+                margin: 0;
+                padding: 0;
+            }
+
+            .slide {
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                border: none;
+                box-shadow: none;
+                page-break-after: always;
+                justify-content: center;
+                background: white !important;
+            }
+
+            .cover-slide {
+                color: #000 !important;
+            }
+
+            .cover-slide .slide-title,
+            .cover-slide .slide-desc {
+                color: #000 !important;
+            }
+
+            body {
+                background: white;
+            }
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translate(-50%, 20px);
+            background: rgba(62, 39, 35, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        #toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, 0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="controls">
+        <button class="btn" id="btn-pdf"><i class="fas fa-file-pdf"></i> 匯出 PDF</button>
+        <button class="btn" id="btn-pptx"><i class="fas fa-file-powerpoint"></i> 匯出 PPTX</button>
+        <button class="btn" id="btn-export-json"><i class="fas fa-download"></i> 儲存/下載 JSON</button>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>專案時程表</h2>
+            </div>
+            <div class="timeline" id="timelineNav">
+                <!-- Autogenerated List -->
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="slide-container" id="slideContainer">
+                <!-- Slides will be dynamically injected here -->
+            </div>
+        </main>
+    </div>
+
+    <div id="toast">訊息</div>
+
+    <script>
+        // Removed hardcoded data array in favor of data.json
+        const fallbackData = [];
+
+        let presentationData = [];
+
+        // State
+        let slides = []; // NodeList updated after render
+
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                presentationData = await response.json();
+            } catch (error) {
+                console.warn('Could not load data.json (likely due to opening file directly in browser). Falling back to default data.', error);
+                presentationData = fallbackData;
+            }
+            renderSlides();
+            initTimeline();
+            // Automatically make editable elements contenteditable
+            document.querySelectorAll('.editable').forEach(el => {
+                el.setAttribute('contenteditable', 'true');
+            });
+        }
+
+        function renderSlides() {
+            const container = document.getElementById('slideContainer');
+            container.innerHTML = ''; // Clear container
+
+            presentationData.forEach((data, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = `slide ${data.type === 'cover' ? 'cover-slide' : ''}`;
+                if (index === 0) slideDiv.classList.add('active-slide');
+                slideDiv.id = `slide-${data.id}`;
+                slideDiv.setAttribute('data-time', data.time);
+                slideDiv.setAttribute('data-type', data.type);
+
+                let innerHTML = '';
+
+                if (data.type === 'cover') {
+                    innerHTML = `
+                        <h1 class="">${data.title}</h1>
+                        <div class="">${data.desc}</div>
+                    `;
+                } else if (data.type === 'summary') {
+                    innerHTML = `
+                        <h2 class="">${data.title}</h2>
+                        <div class="slide-meta">
+                            <span class="" style="font-size: 2rem;">${data.amount}</span>
+                        </div>
+                        <div class="" style="font-size: 1.5rem; text-align: left;">
+                            ${data.desc}
+                        </div>
+                    `;
+                } else {
+                    innerHTML = `
+                        <h2 class="">${data.title}</h2>
+                        <div class="slide-meta">
+                            <span class=""><i class="far fa-clock"></i> <span class="editable time-text">${data.time}</span></span>
+                            <span class="">${data.amount}</span>
+                        </div>
+                        <div class="">${data.desc}</div>
+                    `;
+                }
+
+                slideDiv.innerHTML = innerHTML;
+                container.appendChild(slideDiv);
+            });
+
+            // Update DOM reference
+            slides = document.querySelectorAll('.slide');
+
+            // Re-bind contenteditable blur events
+            document.querySelectorAll('.editable').forEach(el => {
+                el.addEventListener('blur', () => {
+                    initTimeline();
+                });
+            });
+        }
+
+        // Initialize timeline sidebar
+        function initTimeline() {
+            const timeline = document.getElementById('timelineNav');
+            timeline.innerHTML = '';
+
+            slides.forEach((slide, idx) => {
+                if (idx === 0) return; // Skip cover for timeline
+
+                let timeStr = slide.getAttribute('data-time') || '';
+                let timeNode = slide.querySelector('.time-text');
+                if (timeNode) {
+                    timeStr = timeNode.innerText; // Sync if edited
+                }
+                const titleNode = slide.querySelector('h1, h2');
+                const titleStr = titleNode ? titleNode.innerText : presentationData[idx]?.title || "";
+
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                item.onclick = () => scrollToSlide(idx);
+                item.innerHTML = `
+                    <div class="timeline-time">${timeStr}</div>
+                    <div class="timeline-title">${titleStr}</div>
+                `;
+                timeline.appendChild(item);
+            });
+        }
+
+        function scrollToSlide(idx) {
+            slides[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+
+        // Export JSON logic
+        function exportToJson() {
+            const exportedData = [];
+            slides.forEach((slide, idx) => {
+                const type = slide.getAttribute('data-type');
+                const titleNode = slide.querySelector('h1, h2');
+                const descNode = slide.lastElementChild;
+
+                let slideData = {
+                    id: idx,
+                    type: type,
+                    title: titleNode ? titleNode.innerHTML.trim() : "",
+                    desc: descNode ? descNode.innerHTML.trim() : ""
+                };
+
+                // Add time and amount for non-cover slides
+                if (type !== 'cover') {
+                    const timeNode = slide.querySelector('.time-text');
+                    if (timeNode) slideData.time = timeNode.innerText.trim();
+                    else slideData.time = slide.getAttribute('data-time'); // fallback for summary if needed
+
+                    const amountNode = slide.querySelector('.slide-amount');
+                    if (amountNode) slideData.amount = amountNode.innerText.trim();
+                }
+
+                exportedData.push(slideData);
+            });
+
+            // Convert back to JSON and trigger download
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportedData, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "data.json");
+            document.body.appendChild(downloadAnchorNode); // required for firefox
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+
+            showToast("已下載最新 data.json，請將其上傳至 GitHub。");
+        }
+
+        // Utils
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Event Listeners
+        document.getElementById('btn-export-json').addEventListener('click', exportToJson);
+
+        // Export PDF
+        document.getElementById('btn-pdf').addEventListener('click', () => {
+            window.print();
+        });
+
+        // Export PPTX
+        document.getElementById('btn-pptx').addEventListener('click', async () => {
+            showToast("準備建立投影片，請稍候...");
+
+            if (typeof PptxGenJS === 'undefined') {
+                showToast("發生錯誤：尚未載入 PPTX 庫");
+                return;
+            }
+
+            let pptx = new PptxGenJS();
+            pptx.layout = 'LAYOUT_WIDE'; // 16:9
+
+            pptx.defineSlideMaster({
+                title: 'MASTER_SLIDE',
+                background: { color: 'FDFBF7' },
+            });
+
+            slides.forEach((slide, idx) => {
+                let pptSlide = pptx.addSlide({ masterName: 'MASTER_SLIDE' });
+
+                if (slide.classList.contains('cover-slide')) {
+                    pptSlide.background = { color: '3E2723' };
+                    const titleNode = slide.querySelector('h1, h2');
+                    let title = titleNode ? titleNode.innerText : presentationData[idx]?.title || "";
+                    let desc = slide.lastElementChild ? slide.lastElementChild.innerText : "";
+
+                    pptSlide.addText(title, { x: 1, y: 1.5, w: '80%', color: 'FFFFFF', fontFace: 'Microsoft JhengHei', fontSize: 48, bold: true, align: 'center', breakLine: true });
+                    pptSlide.addText(desc, { x: 1, y: 4.5, w: '80%', color: 'D7CCC8', fontFace: 'Microsoft JhengHei', fontSize: 24, align: 'center' });
+                } else {
+                    const titleNode = slide.querySelector('h1, h2');
+                    let title = titleNode ? titleNode.innerText : presentationData[idx]?.title || "";
+                    pptSlide.addText(title, { x: 0.8, y: 0.8, w: '85%', color: '3E2723', fontFace: 'Microsoft JhengHei', fontSize: 36, bold: true, border: { type: 'bottom', pt: 2, color: '5D4037' } });
+
+                    let metaEl = slide.querySelector('.slide-meta');
+                    if (metaEl) {
+                        let timeNode = slide.querySelector('.time-text');
+                        let amountNode = slide.querySelector('.slide-amount');
+
+                        let timeStr = timeNode ? timeNode.innerText.trim() : '';
+                        let amountStr = amountNode ? amountNode.innerText.trim() : '';
+
+                        if (timeStr) {
+                            pptSlide.addText(`時程: ${timeStr}      預算: ${amountStr}`, { x: 0.8, y: 2.0, w: '80%', color: '8D6E63', fontFace: 'Microsoft JhengHei', fontSize: 18, bold: true });
+                        } else {
+                            pptSlide.addText(`預算: ${amountStr}`, { x: 0.8, y: 2.0, w: '80%', color: '8D6E63', fontFace: 'Microsoft JhengHei', fontSize: 22, bold: true });
+                        }
+                    }
+
+                    let desc = slide.lastElementChild ? slide.lastElementChild.innerText : "";
+                    pptSlide.addText(desc, { x: 0.8, y: 3, w: '85%', color: '555555', fontFace: 'Microsoft JhengHei', fontSize: 22, breakLine: true });
+                }
+            });
+
+            try {
+                await pptx.writeFile({ fileName: 'Coffee_Shop_Proposal.pptx' });
+                showToast("簡報下載成功！");
+            } catch (e) {
+                showToast("下載失敗...");
+                console.error(e);
+            }
+        });
+
+        // App Init entry point
+        loadData();
+    </script>
+</body>
+
+</html>

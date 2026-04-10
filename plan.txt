@@ -1,0 +1,8 @@
+this is a 企劃書 website.
+Website language: Traditional Chinese
+create a color palette suitable for coffee shop
+navigation: one page design
+on the left of the page, create a timeline showing date of completion.
+since it is a presentation, create a function to switch between presentation mode and editing mode.
+each section correspond to a slide. in presentation mode, each section will be displayed as a slide.    
+create an export function, export to pdf or powerpoint.
