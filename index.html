@@ -18,6 +18,18 @@
 
 <body>
 
+    <div id="authOverlay" class="auth-overlay" aria-hidden="true">
+        <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+            <div class="auth-title" id="authTitle">Password required</div>
+            <div class="auth-subtitle">Enter password to continue</div>
+            <form id="authForm" class="auth-form">
+                <input id="authPassword" class="auth-input" type="password" autocomplete="current-password" placeholder="Password" />
+                <button id="authSubmit" class="auth-btn" type="submit">Unlock</button>
+            </form>
+            <div id="authError" class="auth-error" style="display:none;">Incorrect password</div>
+        </div>
+    </div>
+
     <div class="controls">
         <button class="btn" id="btn-pdf"><i class="fas fa-file-pdf"></i> 匯出 PDF</button>
         <button class="btn" id="btn-pptx"><i class="fas fa-file-powerpoint"></i> 匯出 PPTX</button>
@@ -54,6 +66,46 @@
     </div>
 
     <script>
+        (function initPasswordGate() {
+            const AUTH_KEY = 'coffee_auth_unlocked';
+            const PASSWORD = 'kirk';
+            const overlay = document.getElementById('authOverlay');
+            const form = document.getElementById('authForm');
+            const input = document.getElementById('authPassword');
+            const error = document.getElementById('authError');
+
+            function lock() {
+                document.body.classList.add('locked');
+                overlay.style.display = 'flex';
+                overlay.setAttribute('aria-hidden', 'false');
+                if (input) input.value = '';
+                if (error) error.style.display = 'none';
+                setTimeout(() => input && input.focus(), 0);
+            }
+
+            function unlock() {
+                sessionStorage.setItem(AUTH_KEY, '1');
+                document.body.classList.remove('locked');
+                overlay.style.display = 'none';
+                overlay.setAttribute('aria-hidden', 'true');
+            }
+
+            const unlocked = sessionStorage.getItem(AUTH_KEY) === '1';
+            if (!unlocked) lock();
+            else unlock();
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const val = (input.value || '').trim();
+                if (val === PASSWORD) {
+                    unlock();
+                } else {
+                    if (error) error.style.display = 'block';
+                    if (input) input.select();
+                }
+            });
+        })();
+
         // Removed hardcoded data array in favor of data.json
         const fallbackData = [];
 
