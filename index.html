@@ -23,7 +23,8 @@
             <div class="auth-title" id="authTitle">Password required</div>
             <div class="auth-subtitle">Enter password to continue</div>
             <form id="authForm" class="auth-form">
-                <input id="authPassword" class="auth-input" type="password" autocomplete="current-password" placeholder="Password" />
+                <input id="authPassword" class="auth-input" type="password" autocomplete="current-password"
+                    placeholder="Password" />
                 <button id="authSubmit" class="auth-btn" type="submit">Unlock</button>
             </form>
             <div id="authError" class="auth-error" style="display:none;">Incorrect password</div>
@@ -32,8 +33,9 @@
 
     <div class="controls">
         <button class="btn" id="btn-pdf"><i class="fas fa-file-pdf"></i> 匯出 PDF</button>
-        <button class="btn" id="btn-pptx"><i class="fas fa-file-powerpoint"></i> 匯出 PPTX</button>
-        <button style="display: none;" class="btn" id="btn-export-json"><i class="fas fa-download"></i> 儲存/下載 JSON</button>
+        <button style="display: none;" class="btn" id="btn-pptx"><i class="fas fa-file-powerpoint"></i> 匯出 PPTX</button>
+        <button style="display: none;" class="btn" id="btn-export-json"><i class="fas fa-download"></i> 儲存/下載
+            JSON</button>
     </div>
 
     <div class="app-container">
@@ -127,6 +129,7 @@
             }
             renderSlides();
             initTimeline();
+            initScrollSpy();
             // Automatically make editable elements contenteditable
             document.querySelectorAll('.editable').forEach(el => {
                 el.setAttribute('contenteditable', 'true');
@@ -171,7 +174,7 @@
                             </ul>
                         `;
                     }
-                    
+
                     let galleryHTML = '';
                     if (data.gallery && data.gallery.length > 0) {
                         galleryHTML = `
@@ -180,11 +183,12 @@
                             </div>
                         `;
                     }
-                    
+
+                    const timeHtml = data.isSubSection ? '' : `<span class=""><i class="far fa-clock"></i> <span class="">${data.time}</span></span>`;
                     innerHTML = `
                         <h2 class="">${data.title}</h2>
                         <div class="slide-meta">
-                            <span class=""><i class="far fa-clock"></i> <span class="">${data.time}</span></span>
+                            ${timeHtml}
                             <span class="">${data.amount}</span>
                         </div>
                         <div class="desc-text">${data.desc}</div>
@@ -242,6 +246,44 @@
 
         function scrollToSlide(idx) {
             slides[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Scrollspy - highlight timeline item based on visible slide
+        function initScrollSpy() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const slideId = entry.target.id;
+                        const slideIndex = Array.from(slides).findIndex(slide => slide.id === slideId);
+
+                        if (slideIndex !== -1) {
+                            updateActiveTimelineItem(slideIndex);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            slides.forEach(slide => {
+                observer.observe(slide);
+            });
+        }
+
+        function updateActiveTimelineItem(slideIndex) {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+
+            timelineItems.forEach((item, idx) => {
+                item.classList.remove('active');
+                // Timeline items start from index 1 (skip cover slide at index 0)
+                if (idx === slideIndex - 1) {
+                    item.classList.add('active');
+                }
+            });
         }
 
 
@@ -329,13 +371,13 @@
         function navigateModal(direction) {
             if (!isModalOpen || currentGallery.length === 0) return;
             currentModalIndex += direction;
-            
+
             if (currentModalIndex < 0) {
                 currentModalIndex = currentGallery.length - 1;
             } else if (currentModalIndex >= currentGallery.length) {
                 currentModalIndex = 0;
             }
-            
+
             document.getElementById('modalImage').src = currentGallery[currentModalIndex];
         }
 
@@ -355,7 +397,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             const modal = document.getElementById('imageModal');
             if (modal) {
-                modal.addEventListener('click', function(e) {
+                modal.addEventListener('click', function (e) {
                     if (e.target === this) {
                         closeModal();
                     }
@@ -364,7 +406,7 @@
         });
 
         // Keyboard navigation for modal
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (!isModalOpen) return;
             if (e.key === 'ArrowRight') {
                 navigateModal(1);

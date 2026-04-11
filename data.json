@@ -8,18 +8,65 @@
     },
     {
         "id": 1,
-        "type": "content",
+        "type": "content",  
         "time": "4-6 月",
         "title": "品牌 IP 與視覺策略規劃",
         "amount": "",
-        "desc": "包含品牌定位、品牌視覺規劃、包裝規範設計。為您的咖啡廳打造獨一無二的高識別度品牌形象。<br><a target=\"_blank\" href='https://lh3.googleusercontent.com/geougc/AF1QipOHo6O3qDIx4NCNrRFsZXexaOeqsrxtR3sWWeEy=mm,37,22,18'>Reference 1</a>",
+        "desc": "包含品牌定位、品牌視覺規劃、包裝規範設計。為您的咖啡廳打造獨一無二的高識別度品牌形象。",
         "gallery": [
-            "img/cafe_concept.png",
-            "img/cafe_concept_inside.png"
+            
         ]
     },
     {
         "id": 2,
+        "type": "content",
+        "time": "4-6 月",
+        "title": "角色設定 (可以是創辦人或吉祥物)",
+        "amount": "",
+        "desc": "現代的年輕上班族已經對「用高價買品牌光環，卻喝到焦苦味」感到疲乏。他們需要的是一個懂他們委屈、並且能帶給他們真實價值的「風味嚮導」。<br><br>性格標籤： 坦率、真誠、對風味有近乎執拗的要求，但對客人極度包容與耐心，認為好咖啡不該有距離感。<br><br>背景故事： Vincent 也曾是個在都市裡庸庸碌碌的年輕人，每天靠著超商或連鎖店昂貴卻焦苦的咖啡續命。直到某天喝到了一杯真正處理得當的衣索比亞日曬，發現咖啡竟然能有水蜜桃和花香，從此下定決心。他創立這間店，就是為了提供上班族不一樣的選項。讓大家知道好的咖啡不只是提神還可以細細品嚐。。<br><br>核心價值觀： 「咖啡不只是咖啡因的載體，而是一份值得被逐口細品的風味禮物。」",
+        "gallery": [
+            "img/vincent.png"
+        ],
+        "isSubSection": true
+    },
+    {
+        "id": 3,
+        "type": "content",
+        "time": "4-6 月",
+        "title": "溝通語氣與風格",
+        "amount": "",
+        "desc": "態度： 像是一個懂很多但絕不說教的老朋友。\n\n文案風格： 帶有一點對現狀的幽默嘲諷，但在談論咖啡風味時充滿熱情與詩意。<br><br>經典語（金句）：<li>「別拿平庸的苦澀，敷衍你的早晨。」</li><li>「這杯衣索比亞裡沒有咖啡因的焦慮，只有盛開的白色花園。」</li><li>  「慢一點。這口哥倫比亞的焦糖甜感，值得你停下工作三分鐘。」",
+        "gallery": [
+          
+        ],
+        "isSubSection": true
+    },
+    {
+        "id": 4,
+        "type": "content",
+        "time": "4-6 月",
+        "title": "社群與行銷內容",
+        "amount": "",
+        "desc": "「Vincent風味嚮導」系列貼文： 用最白話的方式，教年輕人怎麼品嚐。<br><br>例如：<br><br>1. 拍一支短影音，標題是《為什麼你喝的拿鐵總是只有奶味和苦味？》，然後帶出 Vincent's Coffee 是如何透過精準的烘焙與萃取，把哥倫比亞豆子裡的巧克力與熱帶水果香氣「解壓縮」出來。<br><br>2.「逐口細品」挑戰： 鼓勵客人不要把咖啡當水灌。在店內提供特殊的品飲杯（例如稍微收口的杯型），Vincent 的立牌或小卡會在旁邊提醒：「第一口先含著兩秒，體會果酸；第二口感受它滑過喉嚨的甜感回甘。」<br><br>3. 反差萌的菜單設計： * 一般義式咖啡（給真的只需要提神的人）標註：「為生存奮鬥的燃料」\n\n    衣索比亞/哥倫比亞手沖（給願意細品的人）標註：「給靈魂的三十分鐘小假期」",
+        "gallery": [
+          
+        ],
+        "isSubSection": true
+    },
+    {
+        "id": 5,
+        "type": "content",
+        "time": "4-6 月",
+        "title": "品牌目的",
+        "amount": "",
+        "desc": "它直接與年輕人的「疲乏感」對話。當市面上的咖啡都在比拼誰的拉花好看、誰的裝潢好拍時，【風味嚮導 Vincent】 把焦點拉回了產品本身，用一種「我懂你不想再花冤枉錢」的同理心，引導他們體驗真正的咖啡工藝。",
+        "gallery": [
+          
+        ],
+        "isSubSection": true
+    },
+    {
+        "id": 6,
         "type": "content",
         "time": "4-6 月",
         "title": "品牌定位",
@@ -28,19 +75,19 @@
         "isSubSection": true
     },
     {
-        "id": 3,
+        "id": 7,
         "type": "content",
         "time": "4-6 月",
         "title": "品牌視覺規劃",
         "amount": "",
-        "desc": "設計 Logo、標準字、色彩計畫與延伸輔助圖形，建立完整的品牌視覺識別系統 (CI/VI)。",
+        "desc": "設計 Logo 範例。",
         "isSubSection": true,
         "gallery": [
             "img/logo.jpg"
         ]
     },
     {
-        "id": 4,
+        "id": 8,
         "type": "content",
         "time": "4-6 月",
         "title": "包裝規範設計",
@@ -55,50 +102,48 @@
         ]
     },
     {
-        "id": 5,
+        "id": 9,
         "type": "content",
         "time": "5-6 月",
         "title": "裝潢風格建議",
         "amount": "$40,000",
-        "desc": "提供裝潢風格與氛圍建議，並協助與室內設計單位以及咖啡設備廠商進行專業對接，確保硬軟及體無縫接軌。"
+        "desc": "提供裝潢風格與氛圍建議，並協助與室內設計單位以及咖啡設備廠商進行專業對接，確保硬軟及體無縫接軌。<br><a target=\"_blank\" href='https://lh3.googleusercontent.com/geougc/AF1QipOHo6O3qDIx4NCNrRFsZXexaOeqsrxtR3sWWeEy=mm,37,22,18'>Reference 1</a>",
+        "gallery": [
+            "img/cafe_concept.png",
+            "img/cafe_concept_inside.png"
+        ]
     },
     {
-        "id": 6,
+        "id": 10,
         "type": "content",
         "time": "5-6 月",
         "title": "產品與菜單研發 (R&D)",
         "amount": "",
         "desc": "主打兩款招牌精品咖啡：衣索比亞・西達摩 與 哥倫比亞・酵酸水洗。<br>精緻簡餐：主打原型食物與新鮮手作，提供特經典套餐，優質輕食沙拉，滿足上班族客群需求。",
-        "gallery": [
-          
-        ]
+        "gallery": []
     },
     {
-        "id": 7,
+        "id": 11,
         "type": "content",
         "time": "5-6 月",
         "title": "衣索比亞・西達摩",
         "amount": "",
         "desc": "【衣索比亞・西達摩】口感溫潤飽滿，散發淡雅花香與水果氣息。提供上班族超越連鎖咖啡的精品體驗，推薦搭配：熱/冰拿鐵、冰美式。",
         "isSubSection": true,
-        "gallery": [
-           
-        ]
+        "gallery": []
     },
     {
-        "id": 8,
+        "id": 12,
         "type": "content",
         "time": "5-6 月",
         "title": "哥倫比亞・酵酸水洗",
         "amount": "",
         "desc": "【哥倫比亞・酵酸水洗】口感滑順輕盈，帶有多層次莓果風味。宛如水果茶般的清新脫俗，讓較少接觸咖啡的朋友也能輕鬆品嚐。推薦搭配：手沖、掛耳包、冰美式。",
         "isSubSection": true,
-        "gallery": [
-           
-        ]
+        "gallery": []
     },
     {
-        "id": 9,
+        "id": 13,
         "type": "content",
         "time": "5-6 月",
         "title": "菜單",
@@ -111,7 +156,7 @@
         ]
     },
     {
-        "id": 10,
+        "id": 14,
         "type": "content",
         "time": "8-9 月",
         "title": "營運系統建置 (SOP)",
@@ -119,7 +164,7 @@
         "desc": "建立各項產品製作方法、設計高效率吧台動線、建構良好庫存管理，並提供完整的員工訓練手冊。"
     },
     {
-        "id": 11,
+        "id": 15,
         "type": "content",
         "time": "4-9 月",
         "title": "現場技術輔導與培訓",
@@ -127,7 +172,7 @@
         "desc": "涵蓋 4 至 9 月期間的實體現場會議及技術驗證，並提供員工完整的現場教育訓練（共計 5 個月）。"
     },
     {
-        "id": 12,
+        "id": 16,
         "type": "content",
         "time": "10 月",
         "title": "開幕壓力測試與預熱支援",
@@ -135,7 +180,7 @@
         "desc": "於 10 月份 Soft Opening 試營運期間進行現場督導考核，並給予社群行銷預熱之專業建議。"
     },
     {
-        "id": 13,
+        "id": 17,
         "type": "summary",
         "time": "結語",
         "title": "專案總結",
